@@ -34,31 +34,37 @@ def set_alert(dataframe, asset, alert_high_price):
 	
 	details = f'{asset}: {"%.8f" % crypto_value}, ValorMinimo: {"%.8f" % alert_high_price}'
 	
-	os.environ['GeeksForGeeks'] = details
+	os.environ['variableLinux'] = details
 	
 	now = datetime.datetime.now()
-	hour = '{:02d}'.format(now.hour)
+	hour = int('{:02d}'.format(now.hour))
 	global loop
 	
 	if crypto_value <= alert_high_price:
 		print(details + ' << VALOR MINIMO ALCANZADO!!')
-		os.system('/home/pi/tg/bin/telegram-cli -k /home/pi/tg/tg-server.pub -W -e "msg Chavo ALERTA VALOR MINIMO ALCANZADO!! $GeeksForGeeks"')
+		os.system('/home/pi/tg/bin/telegram-cli -k /home/pi/tg/tg-server.pub -W -e "msg Chavo ALERTA VALOR MINIMO ALCANZADO!! $variableLinux"')
 		sleep(5)
-		#print("GeeksForGeeks:", os.environ['GeeksForGeeks'])
-		os.system('/home/pi/tg/bin/telegram-cli -k /home/pi/tg/tg-server.pub -W -e "msg Nene_Buga ALERTA VALOR MINIMO ALCANZADO!! $GeeksForGeeks"')
-		
-	elif ((hour!=0 or hour!=1 or hour!=2 or hour!=3 or hour!=4 or hour!=5 or hour!=6 or hour!=7) and (loop >= 60)):
+		#print("variableLinux:", os.environ['variableLinux'])
+		os.system('/home/pi/tg/bin/telegram-cli -k /home/pi/tg/tg-server.pub -W -e "msg Nene_Buga ALERTA VALOR MINIMO ALCANZADO!! $variableLinux"')
+		sleep(5)
+		os.system('/home/pi/tg/bin/telegram-cli -k /home/pi/tg/tg-server.pub -W -e "msg Gibs ALERTA VALOR MINIMO ALCANZADO!! $variableLinux"')
+	
+	elif ((hour not in(0,1,2,3,4,5,6,7)) and (loop >= 60)):
 		loop=0
 		print(hour)
 		print(details)
-		os.system('/home/pi/tg/bin/telegram-cli -k /home/pi/tg/tg-server.pub -W -e "msg Chavo ACTUALIZACION Precio SHIBA cada hora!! $GeeksForGeeks"')
+		os.system('/home/pi/tg/bin/telegram-cli -k /home/pi/tg/tg-server.pub -W -e "msg Chavo ACTUALIZACION Precio SHIBA: $variableLinux"')
 		sleep(5)
-		#print("GeeksForGeeks:", os.environ['GeeksForGeeks'])
-		os.system('/home/pi/tg/bin/telegram-cli -k /home/pi/tg/tg-server.pub -W -e "msg Nene_Buga ACTUALIZACION Precio SHIBA cada hora!! $GeeksForGeeks"')
+		#print("variableLinux:", os.environ['variableLinux'])
+		os.system('/home/pi/tg/bin/telegram-cli -k /home/pi/tg/tg-server.pub -W -e "msg Nene_Buga ACTUALIZACION Precio SHIBA: $variableLinux"')
+		sleep(5)
+		os.system('/home/pi/tg/bin/telegram-cli -k /home/pi/tg/tg-server.pub -W -e "msg Gibs ACTUALIZACION Precio SHIBA: $variableLinux"')
 	
 	else:
 		print(details)
-		
+		#print(hour)
+		#print(hour!=0)
+		#print(hour not in(0,1,2,3,4,5,6,7))
 		
 #Alert While Loop
 loop = 1
